@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "com.eduardoejunin.manipulationcontrol"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.eduardoejunin.manipulationcontrol"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
