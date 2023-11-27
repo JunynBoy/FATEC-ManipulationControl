@@ -14,15 +14,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btCadastro = findViewById(R.id.btCadastro);
+   //     Button btCadastro = findViewById(R.id.btCadastro);
 
-        btCadastro.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(MainActivity.this, CadastroUsuario.class);
-                startActivity(intent);
-            }
-        });
+     //   btCadastro.setOnClickListener(new View.OnClickListener(){
+    //        @Override
+    //        public void onClick(View view){
+     //           Intent intent = new Intent(MainActivity.this, CadastroUsuario.class);
+     //           startActivity(intent);
+   // /      }
+    //    });
+        Intent intent = new Intent(MainActivity.this, Dashboard.class );
+        startActivity(intent);
+
 
     }
 }

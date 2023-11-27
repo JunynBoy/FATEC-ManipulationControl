@@ -13,6 +13,12 @@
         android:theme="@style/Theme.ManipulationControl"
         tools:targetApi="31">
         <activity
+            android:name=".cadastrocomponente"
+            android:exported="false" />
+        <activity
+            android:name=".cadastropedido"
+            android:exported="false" />
+        <activity
             android:name=".CadastroUsuario"
             android:exported="true" />
         <activity

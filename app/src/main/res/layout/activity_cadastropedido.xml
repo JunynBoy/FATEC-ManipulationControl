@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".cadastropedido">
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <EditText
+            android:id="@+id/edtResponsavel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Reponsavel"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/edtQuantidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Quantidade"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/edtTamanho"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Tamanho"
+            android:inputType="text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spnComponentes"
+                android:layout_width="311dp"
+                android:layout_height="52dp" />
+
+            <Button
+                android:id="@+id/btnAdicionarComponentes"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="77dp"
+
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="false"
+                android:width="60dp"
+                android:textAlignment="center"
+                android:textStyle="italic"
+                app:backgroundTint="#65ED4D"
+
+                app:cornerRadius="100dp"
+                app:icon="@mipmap/add"
+                app:iconPadding="0dp"
+                app:iconSize="30dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCadastrarPedido"
+            android:layout_width="393dp"
+            android:layout_height="wrap_content"
+            android:text="Cadastrar"
+
+            app:backgroundTint="#4D55ED" />
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="393dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFBF00"
+
+            android:text="Cancelar"
+            app:backgroundTint="#65ED4D" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

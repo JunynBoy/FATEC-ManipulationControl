@@ -65,7 +65,7 @@ public class CustomAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 // Ação do botão exluir
-                showConfirmationDialog(position);
+                showConfirmationDialog(position, "Tem certeza de que deseja excluir este item?", 1);
           //      dataList.remove(position );
              //   notifyDataSetChanged();
                 Toast.makeText(context, "Excluir", Toast.LENGTH_SHORT).show();
@@ -75,24 +75,34 @@ public class CustomAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 // Ação do botão aprovar
-                Toast.makeText(context, "Aprovar", Toast.LENGTH_SHORT).show();
+                showConfirmationDialog(position, "Finalizar pedido?", 2);
             }
         });
         return view;
     }
-    private void showConfirmationDialog(final int position) {
+    private void showConfirmationDialog(final int position, String mensagem, int tipoConfirmacao) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("ATENÇÃO");
-        builder.setMessage("Tem certeza de que deseja excluir este item?");
+        builder.setMessage(mensagem);
 
         // Adiciona botões "Sim" e "Não"
         builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Lógica para excluir o item
-                dataList.remove(position);
-                notifyDataSetChanged();
-                Toast.makeText(context, "Item excluído com sucesso", Toast.LENGTH_SHORT).show();
+                if (tipoConfirmacao == 1) {
+                    dataList.remove(position);
+                    notifyDataSetChanged();
+                    Toast.makeText(context, "Item excluído com sucesso", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    if(tipoConfirmacao == 2){
+                        dataList.remove(position);
+                        notifyDataSetChanged();
+                        Toast.makeText(context, "Item Aprovado com sucesso", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
             }
         });
 
