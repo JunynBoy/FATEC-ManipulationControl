@@ -5,6 +5,12 @@ public class Cliente {
     public Cliente() {
 
     }
+    public Cliente(int id, String nome, String endereco, String telefone){
+        this.id = id;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.telefone = telefone;
+    }
 
     public long id;
     public String nome;

@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DbHelper extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 5;
+    public static int idUsuarioLogado;
+    public static final int DATABASE_VERSION = 6;
     public static final String DATABASE_NOME = "manipulationControle";
     private static final String CREATE_Componente = "create table " +
             Contract.Componente.TABELA + " ( "+
@@ -143,16 +144,78 @@ public class DbHelper extends SQLiteOpenHelper {
     }
     public void salvaCliente(Cliente cliente){
 
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Contract.Cliente.COLUNA_nome, cliente.getNome());
+        contentValues.put(Contract.Cliente.COLUNA_Endereco, cliente.getEndereco());
+        contentValues.put(Contract.Cliente.COLUNA_Telefone, cliente.getTelefone());
+        long id = sqLiteDatabase.insert(Contract.Cliente.TABELA, null, contentValues);
+        cliente.setId(id);
     }
     public List<Cliente> consultaClientes(){
-        ArrayList lista = new ArrayList();
+
+        List<Cliente> lista = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        String query = "SELECT * FROM " + Contract.Cliente.TABELA;
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from " +
+                Contract.Cliente.TABELA, null);
+        Log.d("RowCount", "Número de linhas: " + cursor.getCount());
+        while (cursor.moveToNext()) {
+            lista.add(new Cliente(cursor.getInt(
+                    cursor.getColumnIndex(Contract.Cliente._ID)),
+                    cursor.getString(cursor.getColumnIndex(Contract.Cliente.COLUNA_nome)),
+                    cursor.getString(cursor.getColumnIndex(Contract.Cliente.COLUNA_Endereco)),
+            cursor.getString(cursor.getColumnIndex(Contract.Cliente.COLUNA_Telefone))));
+//                        cursor.getInt(cursor.getColumnIndex(Contract.Componente.COLUNA_idPedido))));
+
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+
         return lista;
     }
     public void salvaUsuario(Usuario usuario){
-
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Contract.Usuario.COLUNA_nome, usuario.getNome());
+        contentValues.put(Contract.Usuario.COLUNA_Funcao, usuario.getFuncao());
+        contentValues.put(Contract.Usuario.COLUNA_Login, usuario.getLogin());
+        contentValues.put(Contract.Usuario.COLUNA_Senha, usuario.getSenha());
+        long id = sqLiteDatabase.insert(Contract.Usuario.TABELA, null, contentValues);
+        usuario.setId(id);
     }
     public List<Usuario> consultaUsuarios(){
         ArrayList lista = new ArrayList();
         return lista;
+    }
+    public boolean entrar(Usuario usuario) {
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+         String query = "Select * from usuario where login = " + "? and senha = ?" ;
+         String login;
+         String senha;
+         List<Usuario> lista = new ArrayList<>();
+        Cursor cursor =  sqLiteDatabase.rawQuery(query,new String[]{usuario.getLogin(), usuario.getSenha()});
+        if(cursor.getCount() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+    public boolean isValidUser(String username, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selection = Contract.Usuario.COLUNA_Login + " = ? AND " + Contract.Usuario.COLUNA_Senha + " = ?";
+        String[] selectionArgs = {username, password};
+
+        Cursor cursor = db.query(Contract.Usuario.TABELA, null, selection, selectionArgs, null, null, null);
+
+        boolean isValid = cursor.getCount() > 0;
+        idUsuarioLogado = cursor.getColumnIndex(Contract.Componente._ID);
+        cursor.close();
+        db.close();
+
+        return isValid;
     }
 }

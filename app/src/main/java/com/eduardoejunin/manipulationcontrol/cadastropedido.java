@@ -26,16 +26,25 @@ public class cadastropedido extends AppCompatActivity {
         setContentView(R.layout.activity_cadastropedido);
         base = new DbHelper(getApplicationContext());
         Spinner spnComponente = findViewById(R.id.spnComponentes);
+        Spinner spnUsuario = findViewById(R.id.spnUsuario);
         tamanho = findViewById(R.id.edtTamanho);
         quantidade = findViewById(R.id.edtQuantidade);
         responsavel = findViewById(R.id.edtResponsavel);
         List<Componente> dataList = criarListaComponentes();
         ComponentAdapterDropDownComponentes adapter = new ComponentAdapterDropDownComponentes(this, dataList);
+
         spnComponente.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         Button btnAdicionarComponente = findViewById(R.id.btnAdicionarComponentes);
+        Button btnCadastroCliente = findViewById(R.id.btnAdicionarClientes);
         btnCancelar = findViewById(R.id.btnCancelar);
         btnCadastraPedido = findViewById(R.id.btnCadastrarPedido);
+        Usuario usuarioLogado  = new Usuario();
+        List<Usuario> dataListUsuarios = criarListaUsuarios();
+        List<Cliente> dataListClientes = criarListaClientes();
+        ClienteAdapter adapterDropDownClientes = new ClienteAdapter(this, dataListClientes);
+        spnUsuario.setAdapter(adapterDropDownClientes);
+        UsuarioAdapter usuarioAdapter = new UsuarioAdapter(this, dataListUsuarios);
 
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,10 +54,15 @@ public class cadastropedido extends AppCompatActivity {
             }
         });
         btnCadastraPedido.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
                 Pedido pedido = new Pedido();
+                usuarioLogado.setId(base.idUsuarioLogado);
                 pedido.setQuantitade(Integer.parseInt(quantidade.getText().toString()));
+                pedido.setIdUsuario(usuarioLogado.getId());
+                pedido.setTamanho(tamanho.getText().toString());
 
 
                 cadastrarPedido(pedido);
@@ -58,6 +72,13 @@ public class cadastropedido extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),  cadastrocomponente.class);
+                startActivity(intent);
+            }
+        });
+        btnCadastroCliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), cadastroCliente.class);
                 startActivity(intent);
             }
         });
@@ -76,9 +97,17 @@ public class cadastropedido extends AppCompatActivity {
         catch (Exception e){
             e.printStackTrace();
         }
-//        lista.add(new Componente(1, "Dosagem1", "Nome1", 101));
-//        lista.add(new Componente(2, "Dosagem2", "Nome2", 102));
-//        lista.add(new Componente(3, "Dosagem3", "Nome3", 103));
+
+        return lista;
+    }
+    private List<Usuario> criarListaUsuarios(){
+        List<Usuario> lista = new ArrayList<>();
+        lista = base.consultaUsuarios();
+        return lista;
+    }
+    private List<Cliente> criarListaClientes(){
+        List<Cliente> lista = new ArrayList<>();
+        lista = base.consultaClientes();
         return lista;
     }
 
