@@ -15,12 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class cadastropedido extends AppCompatActivity {
+
+    private boolean edit;
     private DbHelper base;
     private Button btnCadastraPedido;
     private Button btnCancelar;
     private TextView quantidade;
     private TextView tamanho;
     private TextView responsavel;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +56,10 @@ public class cadastropedido extends AppCompatActivity {
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(getApplicationContext(), Dashboard.class );
                 startActivity(intent);
+
             }
         });
         btnCadastraPedido.setOnClickListener(new View.OnClickListener() {
@@ -87,26 +93,20 @@ public class cadastropedido extends AppCompatActivity {
         });
     }
     private void cadastrarPedido(Pedido pedido){
-        pedido.setStatus(" Aprovação Pendente");
+        pedido.setStatus("Aprovação Pendente");
         try{
             base.salvarPedido(pedido);
             Toast.makeText(getApplicationContext(), "Pedido salvo com sucesso! ", Toast.LENGTH_SHORT).show();
-
-
         }
         catch(Exception e){
             Toast.makeText(getApplicationContext(), "Erro: ", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
-
         }
     }
     private List<Componente> criarListaComponentes() {
         List<Componente> lista = new ArrayList<>();
         try {
-
-
             lista = base.consultaComponentes();
-
         }
         catch (Exception e){
             e.printStackTrace();
@@ -129,11 +129,7 @@ public class cadastropedido extends AppCompatActivity {
 
 
         try {
-
-
 //            base.salvarComponente(componente);
-
-
         }
         catch (Exception e){
             throw e;

@@ -20,19 +20,17 @@ public class Dashboard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_dashboard);
         ListView listView = findViewById(R.id.listViewPedidos);
         List<Pedido> dataList = consultaPedido();
-        //dataList = consultaPedido();
-
-
         base = new DbHelper(getApplicationContext());
-
         CustomAdapter adapter = new CustomAdapter(this, dataList);
         listView.setAdapter(adapter);
-//        dataList.add("Pedido 1");
-//        dataList.add("Pedido 2");
-//        dataList.add("Pedido 3");
+
+
+
         Button btnAdicionarPedido = findViewById(R.id.btnAdicionarPedido);
         btnAdicionarPedido.setOnClickListener(new View.OnClickListener() {
             @Override
