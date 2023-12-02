@@ -42,7 +42,7 @@ public class Dashboard extends AppCompatActivity {
                 startActivity(intent);
                 //dataList.add("Pedido " + count);
              //   Toast.makeText(getApplicationContext(), "Adicionado", Toast.LENGTH_SHORT).show();
-                adapter.notifyDataSetChanged();
+            //    adapter.notifyDataSetChanged();
 
             }
         });

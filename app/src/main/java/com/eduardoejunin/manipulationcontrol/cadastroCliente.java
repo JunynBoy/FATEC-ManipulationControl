@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 public class cadastroCliente extends AppCompatActivity {
 
-    Button btnVoltarTelaPedido = findViewById(R.id.btnVoltarTelaPedidos);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +19,8 @@ public class cadastroCliente extends AppCompatActivity {
           EditText nome = findViewById(R.id.edtNomeCliente);
          EditText endereco = findViewById(R.id.edtEnderecoCliente);
          EditText telefone = findViewById(R.id.edtTelefoneCliente);
+        Button btnVoltarTelaPedido = findViewById(R.id.btnVoltarTelaPedidos);
+
           Button btnCadastrarCliente = findViewById(R.id.btnCadastrarCliente);
             btnCadastrarCliente.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -45,7 +46,7 @@ public class cadastroCliente extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), cadastropedido.class);
-            //    startActivity(intent);
+                startActivity(intent);
 
             }
         });

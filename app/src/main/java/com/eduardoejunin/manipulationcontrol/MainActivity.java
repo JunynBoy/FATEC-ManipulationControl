@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(), "Login bem-sucedido", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-                    intent.putExtra("idUsuario", usuario.getId());
+//                    intent.putExtra("idUsuario", usuario.getId());
                     startActivity(intent);
                 } else {
                     // Login falhou

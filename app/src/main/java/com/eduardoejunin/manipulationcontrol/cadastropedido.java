@@ -21,15 +21,13 @@ public class cadastropedido extends AppCompatActivity {
     private TextView quantidade;
     private TextView tamanho;
     private TextView responsavel;
-    Spinner spnUsuario = findViewById(R.id.spnUsuario);
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastropedido);
         base = new DbHelper(getApplicationContext());
         Spinner spnComponente = findViewById(R.id.spnComponentes);
+        Spinner spnUsuario = findViewById(R.id.spnUsuario);
         tamanho = findViewById(R.id.edtTamanho);
         quantidade = findViewById(R.id.edtQuantidade);
         responsavel = findViewById(R.id.edtResponsavel);
@@ -48,6 +46,9 @@ public class cadastropedido extends AppCompatActivity {
         ClienteAdapter adapterDropDownClientes = new ClienteAdapter(this, dataListClientes);
         spnUsuario.setAdapter(adapterDropDownClientes);
         UsuarioAdapter usuarioAdapter = new UsuarioAdapter(this, dataListUsuarios);
+        adapter.notifyDataSetChanged();
+        usuarioAdapter.notifyDataSetChanged();
+        adapterDropDownClientes.notifyDataSetChanged();
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,9 +91,6 @@ public class cadastropedido extends AppCompatActivity {
         try{
             base.salvarPedido(pedido);
             Toast.makeText(getApplicationContext(), "Pedido salvo com sucesso! ", Toast.LENGTH_SHORT).show();
-            quantidade.setText("");
-            responsavel.setText("");
-            spnUsuario.setId(0);
 
 
         }

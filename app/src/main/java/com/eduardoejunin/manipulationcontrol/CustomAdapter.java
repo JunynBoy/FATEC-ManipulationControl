@@ -53,7 +53,7 @@ public class CustomAdapter extends BaseAdapter {
         Button btnAprovar = view.findViewById(R.id.btnAprovar);
         Pedido pedido = dataList.get(position);
 
-        textView.setText("Pedido: " + pedido.getId()  + "Status: "+pedido.getStatus());
+        textView.setText("Pedido: " + pedido.getId()  + " Status: "+pedido.getStatus());
         btnAlterar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
