@@ -16,19 +16,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dashboard extends AppCompatActivity {
-
+    DbHelper base ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
         ListView listView = findViewById(R.id.listViewPedidos);
-        List<String> dataList = new ArrayList<>();
+        List<Pedido> dataList = consultaPedido();
+        //dataList = consultaPedido();
+
+
+        base = new DbHelper(getApplicationContext());
+
         CustomAdapter adapter = new CustomAdapter(this, dataList);
         listView.setAdapter(adapter);
-        dataList.add("Pedido 1");
-        dataList.add("Pedido 2");
-        dataList.add("Pedido 3");
+//        dataList.add("Pedido 1");
+//        dataList.add("Pedido 2");
+//        dataList.add("Pedido 3");
         Button btnAdicionarPedido = findViewById(R.id.btnAdicionarPedido);
         btnAdicionarPedido.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,13 +40,19 @@ public class Dashboard extends AppCompatActivity {
                 int count = adapter.getCount() + 1;
                 Intent intent = new Intent(getApplicationContext(),  cadastropedido.class);
                 startActivity(intent);
-                dataList.add("Pedido " + count);
-                Toast.makeText(getApplicationContext(), "Adicionado", Toast.LENGTH_SHORT).show();
+                //dataList.add("Pedido " + count);
+             //   Toast.makeText(getApplicationContext(), "Adicionado", Toast.LENGTH_SHORT).show();
                 adapter.notifyDataSetChanged();
 
             }
         });
 
 
+    }
+    private List<Pedido> consultaPedido(){
+        base = new DbHelper(getApplicationContext());
+        List<Pedido>lista = new ArrayList<>();
+        lista = base.consultaPedidos();
+        return lista;
     }
 }

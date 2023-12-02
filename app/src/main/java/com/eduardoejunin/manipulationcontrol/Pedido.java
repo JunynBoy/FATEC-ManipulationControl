@@ -1,5 +1,7 @@
 package com.eduardoejunin.manipulationcontrol;
 
+import android.content.Context;
+
 public class Pedido {
     private long id;
     private int quantitade;
@@ -32,11 +34,15 @@ public class Pedido {
     public void setTamanho(String tamanho){
         this.tamanho = tamanho;
     }
+    public void setStatus(String status){this.status = status;}
     public long getIdUsuario(){
         return idUsuario;
     }
     public void setIdUsuario(long idUsuario){
         this.idUsuario = idUsuario;
+    }
+    public long getId(){
+        return this.id;
     }
     public long getIdCliente(){
         return idCliente;
@@ -46,5 +52,10 @@ public class Pedido {
     }
     public void setId(long id){
         this.id = id;
+    }
+    public String getNomeCliente(long idCliente, Context context){
+        DbHelper       base = new DbHelper(context);
+     return   base.getNomeCliente(idCliente);
+
     }
 }

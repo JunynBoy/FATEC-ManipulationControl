@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +21,15 @@ public class cadastropedido extends AppCompatActivity {
     private TextView quantidade;
     private TextView tamanho;
     private TextView responsavel;
+    Spinner spnUsuario = findViewById(R.id.spnUsuario);
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastropedido);
         base = new DbHelper(getApplicationContext());
         Spinner spnComponente = findViewById(R.id.spnComponentes);
-        Spinner spnUsuario = findViewById(R.id.spnUsuario);
         tamanho = findViewById(R.id.edtTamanho);
         quantidade = findViewById(R.id.edtQuantidade);
         responsavel = findViewById(R.id.edtResponsavel);
@@ -45,7 +48,6 @@ public class cadastropedido extends AppCompatActivity {
         ClienteAdapter adapterDropDownClientes = new ClienteAdapter(this, dataListClientes);
         spnUsuario.setAdapter(adapterDropDownClientes);
         UsuarioAdapter usuarioAdapter = new UsuarioAdapter(this, dataListUsuarios);
-
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +57,7 @@ public class cadastropedido extends AppCompatActivity {
         });
         btnCadastraPedido.setOnClickListener(new View.OnClickListener() {
 
-
+            Cliente cliente = new Cliente();
             @Override
             public void onClick(View v) {
                 Pedido pedido = new Pedido();
@@ -63,7 +65,7 @@ public class cadastropedido extends AppCompatActivity {
                 pedido.setQuantitade(Integer.parseInt(quantidade.getText().toString()));
                 pedido.setIdUsuario(usuarioLogado.getId());
                 pedido.setTamanho(tamanho.getText().toString());
-
+                pedido.setIdCliente(        spnUsuario.getId());
 
                 cadastrarPedido(pedido);
             }
@@ -84,7 +86,21 @@ public class cadastropedido extends AppCompatActivity {
         });
     }
     private void cadastrarPedido(Pedido pedido){
+        pedido.setStatus(" Aprovação Pendente");
+        try{
+            base.salvarPedido(pedido);
+            Toast.makeText(getApplicationContext(), "Pedido salvo com sucesso! ", Toast.LENGTH_SHORT).show();
+            quantidade.setText("");
+            responsavel.setText("");
+            spnUsuario.setId(0);
 
+
+        }
+        catch(Exception e){
+            Toast.makeText(getApplicationContext(), "Erro: ", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+
+        }
     }
     private List<Componente> criarListaComponentes() {
         List<Componente> lista = new ArrayList<>();

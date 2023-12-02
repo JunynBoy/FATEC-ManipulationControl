@@ -34,7 +34,8 @@ public class cadastrocomponente extends AppCompatActivity {
               //  componente.setIdPedido(3);
                 base.salvarComponente(componente);
                 Toast.makeText(getApplicationContext(), "Cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
-
+                dosagem.setText("");
+                formula.setText("");
             }
         });
         btnVoltar.setOnClickListener(new View.OnClickListener() {

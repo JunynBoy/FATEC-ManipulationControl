@@ -24,6 +24,7 @@
                 android:layout_width="343dp"
                 android:layout_height="49dp"
                 android:background="@drawable/rounded_edittext"
+                android:backgroundTint="#91D6EC"
                 android:ems="10"
                 android:fontFamily="sans-serif"
                 android:hint="Nome"
@@ -93,6 +94,14 @@
                 android:textAlignment="center"
                 android:textSize="28sp"
                 app:cornerRadius="15dp" />
+
+            <Button
+                android:id="@+id/btnVoltarTelaPedidos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FF3995B2"
+                android:text="Voltar"
+                android:textSize="24sp" />
 
 
         </LinearLayout>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#225C6E"
     tools:context=".cadastropedido">
 
     <LinearLayout
@@ -13,29 +14,50 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
-        <EditText
-            android:id="@+id/edtResponsavel"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Reponsavel"
-            android:inputType="text" />
+            android:layout_height="80dp"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edtQuantidade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Quantidade"
-            android:inputType="text" />
+            <EditText
+                android:id="@+id/edtResponsavel"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/rounded_edittext"
+                android:ems="10"
+                android:hint="Reponsavel"
+                android:inputType="text" />
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/edtTamanho"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Tamanho"
-            android:inputType="text" />
+            android:layout_height="69dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edtQuantidade"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/rounded_edittext"
+                android:ems="10"
+                android:hint="Quantidade"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edtTamanho"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:background="@drawable/rounded_edittext"
+                android:ems="10"
+                android:hint="Tamanho"
+                android:inputType="text" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,7 +67,8 @@
             <Spinner
                 android:id="@+id/spnComponentes"
                 android:layout_width="328dp"
-                android:layout_height="52dp" />
+                android:layout_height="52dp"
+                android:backgroundTint="#91D6EC" />
 
             <Button
                 android:id="@+id/btnAdicionarComponentes"
@@ -74,7 +97,15 @@
             <Spinner
                 android:id="@+id/spnUsuario"
                 android:layout_width="328dp"
-                android:layout_height="51dp" />
+                android:layout_height="51dp"
+                android:backgroundTint="#91D6EC" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="#91D6EC" />
 
             <Button
                 android:id="@+id/btnAdicionarClientes"
@@ -105,16 +136,15 @@
                 android:layout_height="wrap_content"
                 android:text="Cadastrar"
 
-                app:backgroundTint="#4D55ED" />
+                app:backgroundTint="#FF3995B2" />
 
             <Button
                 android:id="@+id/btnCancelar"
                 android:layout_width="204dp"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#FFBF00"
 
-                android:text="Cancelar"
-                app:backgroundTint="#65ED4D" />
+                android:backgroundTint="#FF3995B2"
+                android:text="Cancelar" />
         </LinearLayout>
 
     </LinearLayout>

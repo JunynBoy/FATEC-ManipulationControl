@@ -107,6 +107,7 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(Contract.Pedido.COLUNA_Status, pedido.getStatus());
         contentValues.put(Contract.Pedido.COLUNA_idUsuario, pedido.getIdUsuario());
         contentValues.put(Contract.Pedido.COLUNA_idCliente, pedido.getIdCliente());
+
         long id = sqLiteDatabase.insert(Contract.Pedido.TABELA, null, contentValues);
         pedido.setId(id);
     }
@@ -134,13 +135,41 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return lista;
     }
-    public ArrayList consultaPedidos(){
-        ArrayList lista = new ArrayList();
+    public List<Pedido> consultaPedidos(){
+        List<Pedido> lista = new ArrayList();
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
 
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from " +
+                Contract.Pedido.TABELA, null);
+        while (cursor.moveToNext()) {
+            lista.add(new Pedido(cursor.getInt(
+                    cursor.getColumnIndex(Contract.Pedido._ID)),
+                    cursor.getInt(cursor.getColumnIndex(Contract.Pedido.COLUNA_QUANTIDADE)),
+                    cursor.getString(cursor.getColumnIndex(Contract.Pedido.COLUNA_Status)),
+                    cursor.getString(cursor.getColumnIndex(Contract.Pedido.COLUNA_Tamanho)),
+                    cursor.getInt(cursor.getColumnIndex(Contract.Pedido.COLUNA_idUsuario)),
+                        cursor.getInt(cursor.getColumnIndex(Contract.Pedido.COLUNA_idCliente))));
+
+        }
+        cursor.close();
+        sqLiteDatabase.close();
 
         return lista;
+    }
+    public String getNomeCliente(long idCliente){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        String nome = "";
+        Cursor cursor = sqLiteDatabase.rawQuery("select nome from " +
+                Contract.Cliente.TABELA + " Where " + Contract.Cliente._ID + " = " + idCliente, null);
+        while (cursor.moveToNext()) {
+            nome =  cursor.getString(cursor.getColumnIndex(Contract.Cliente.COLUNA_nome));
+
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return nome;
     }
     public void salvaCliente(Cliente cliente){
 
@@ -217,5 +246,10 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
 
         return isValid;
+    }
+    public void removePedido(long idPedido){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(Contract.Pedido.TABELA, "_id=" + idPedido, null);
+
     }
 }

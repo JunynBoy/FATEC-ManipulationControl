@@ -7,10 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class cadastroCliente extends AppCompatActivity {
 
-
+    Button btnVoltarTelaPedido = findViewById(R.id.btnVoltarTelaPedidos);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +30,25 @@ public class cadastroCliente extends AppCompatActivity {
                         cliente.setNome(nome.getText().toString());
                         cliente.setTelefone(telefone.getText().toString());
                         base.salvaCliente(cliente);
+                        endereco.setText("");
+                        nome.setText("");
+                        telefone.setText("");
+                        Toast.makeText(getApplicationContext(), "Cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+
                     }
                     catch (Exception e){
 
                     }
                 }
             });
+        btnVoltarTelaPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), cadastropedido.class);
+            //    startActivity(intent);
+
+            }
+        });
 
     }
 }

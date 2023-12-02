@@ -17,35 +17,65 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#225C6E"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/edtFormula"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Formula"
-                android:inputType="text" />
+                android:layout_height="90dp"
+                android:orientation="vertical"></LinearLayout>
 
-            <EditText
-                android:id="@+id/edtDose"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Dosagem"
-                android:inputType="text"/>
+                android:layout_height="82dp"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnCadastrarComponente"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cadastrar" />
+                <EditText
+                    android:id="@+id/edtFormula"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/rounded_edittext"
+                    android:ems="10"
+                    android:hint="Formula"
+                    android:inputType="text" />
 
-            <Button
-                android:id="@+id/btnVoltarTelaInicial"
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Voltar" />
+                android:layout_height="95dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edtDose"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/rounded_edittext"
+                    android:ems="10"
+                    android:hint="Dosagem"
+                    android:inputType="text" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnCadastrarComponente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FF3995B2"
+                    android:text="Cadastrar" />
+
+                <Button
+                    android:id="@+id/btnVoltarTelaInicial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FF3995B2"
+                    android:text="Voltar" />
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

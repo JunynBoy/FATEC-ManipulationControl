@@ -20,9 +20,9 @@ import java.util.List;
 public class CustomAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> dataList;
+    private List<Pedido> dataList;
 
-    public CustomAdapter(Context context, List<String> dataList) {
+    public CustomAdapter(Context context, List<Pedido> dataList) {
         this.context = context;
         this.dataList = dataList;
     }
@@ -51,9 +51,9 @@ public class CustomAdapter extends BaseAdapter {
         Button btnAlterar = view.findViewById(R.id.btnAlterar);
         Button btnExcluir = view.findViewById(R.id.btnExcluir);
         Button btnAprovar = view.findViewById(R.id.btnAprovar);
+        Pedido pedido = dataList.get(position);
 
-        // Configurar o texto e o clique do botão
-        textView.setText(dataList.get(position));
+        textView.setText("Pedido: " + pedido.getId()  + "Status: "+pedido.getStatus());
         btnAlterar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +66,8 @@ public class CustomAdapter extends BaseAdapter {
             public void onClick(View v) {
                 // Ação do botão exluir
                 showConfirmationDialog(position, "Tem certeza de que deseja excluir este item?", 1);
+                DbHelper base = new DbHelper(context);
+                base.removePedido(pedido.getId());
           //      dataList.remove(position );
              //   notifyDataSetChanged();
                 Toast.makeText(context, "Excluir", Toast.LENGTH_SHORT).show();
@@ -97,7 +99,10 @@ public class CustomAdapter extends BaseAdapter {
                 }
                 else{
                     if(tipoConfirmacao == 2){
-                        dataList.remove(position);
+                        Pedido pedido = dataList.get(position);
+
+//                        dataList.remove(position);
+                        pedido.setStatus("Aprovado");
                         notifyDataSetChanged();
                         Toast.makeText(context, "Item Aprovado com sucesso", Toast.LENGTH_SHORT).show();
                     }
